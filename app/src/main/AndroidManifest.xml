@@ -1,0 +1,20 @@
+<manifest package="justbucket.familiar.musicextension"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-feature android:name="familiar.extension" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true">
+
+        <meta-data android:name="familiar.extension.name" android:value="Familiar music extension"/>
+        <meta-data android:name="familiar.extension.configurator" android:value="justbucket.familiar.musicextension.MusicConfigurator"/>
+        <meta-data android:name="familiar.extension.locator" android:value="justbucket.familiar.musicextension.MusicLocator"/>
+        <meta-data android:name="familiar.extension.model.mapper" android:value="justbucket.familiar.musicextension.MusicModelMapper"/>
+
+    </application>
+
+</manifest>
