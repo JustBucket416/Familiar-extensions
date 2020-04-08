@@ -10,13 +10,13 @@
         android:roundIcon="@mipmap/ic_launcher_round">
 
         <meta-data android:name="familiar.extension.name"
-            android:value="" />
+            android:value="Familiar Youtube extension" />
         <meta-data android:name="familiar.extension.configurator"
-            android:value="" />
+            android:value="justbucket.familiar.extension.youtube.YoutubeConfigurator" />
         <meta-data android:name="familiar.extension.locator"
-            android:value="" />
+            android:value="justbucket.familiar.extension.youtube.YoutubeLocator" />
         <meta-data android:name="familiar.extension.model.mapper"
-            android:value="" />
+            android:value="justbucket.familiar.extension.youtube.YoutubeModelMapper" />
 
     </application>
 
