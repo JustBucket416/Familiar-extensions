@@ -7,16 +7,17 @@ import org.json.JSONObject
 
 class MusicModelMapper : ExtensionModelMapper(EXTENSION_NAME) {
 
-    override fun mapDetailToLocal(detailModel: DetailModel): String? {
+    override suspend fun mapDetailToLocal(detailModel: DetailModel): String? {
+        val savedArtPath = AlbumArtCache.getInstance(null).saveAlbumArtFromCache(detailModel.imageLink)
         val jsonObject = JSONObject()
         jsonObject.put(TITLE_KEY, detailModel.title)
         jsonObject.put(EXTENSION_NAME, EXTENSION_NAME_KEY)
-        jsonObject.put(IMAGE_KEY, detailModel.imageLink)
+        jsonObject.put(IMAGE_KEY, savedArtPath)
         jsonObject.put(DESCRIPTION_KEY, detailModel.description)
         return jsonObject.toString()
     }
 
-    override fun mapLocalToDetail(jsonString: String): DetailModel? {
+    override suspend fun mapLocalToDetail(jsonString: String): DetailModel? {
         val jsonObject = JSONObject(jsonString)
         return DetailModel(
             EXTENSION_NAME,
@@ -26,7 +27,7 @@ class MusicModelMapper : ExtensionModelMapper(EXTENSION_NAME) {
         )
     }
 
-    override fun mapLocalToMaster(id: Long, jsonString: String): MasterModel? {
+    override suspend fun mapLocalToMaster(id: Long, jsonString: String): MasterModel? {
         val jsonObject = JSONObject(jsonString)
         return MasterModel(
             id,
@@ -37,11 +38,12 @@ class MusicModelMapper : ExtensionModelMapper(EXTENSION_NAME) {
         )
     }
 
-    override fun mapMasterToLocal(masterModel: MasterModel): String? {
+    override suspend fun mapMasterToLocal(masterModel: MasterModel): String? {
+        val savedArtPath = AlbumArtCache.getInstance(null).saveAlbumArtFromCache(masterModel.imageLink)
         val jsonObject = JSONObject()
         jsonObject.put(TITLE_KEY, masterModel.title)
         jsonObject.put(EXTENSION_NAME, EXTENSION_NAME_KEY)
-        jsonObject.put(IMAGE_KEY, masterModel.imageLink)
+        jsonObject.put(IMAGE_KEY, savedArtPath)
         jsonObject.put(DESCRIPTION_KEY, masterModel.description)
         return jsonObject.toString()
     }
