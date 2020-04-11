@@ -1,4 +1,4 @@
-<manifest package="justbucket.familiar.extension.image"
+<manifest package="justbucket.familiar.extension.youtube"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-feature android:name="familiar.extension" />
@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round">
 
         <meta-data android:name="familiar.extension.name"
-            android:value="Familiar Youtube extension" />
+            android:value="Familiar Youtube Extension" />
         <meta-data android:name="familiar.extension.configurator"
             android:value="justbucket.familiar.extension.youtube.YoutubeConfigurator" />
         <meta-data android:name="familiar.extension.locator"
