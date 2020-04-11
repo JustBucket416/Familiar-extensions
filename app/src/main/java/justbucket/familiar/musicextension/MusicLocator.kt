@@ -42,22 +42,26 @@ class MusicLocator : ExtensionLocator(EXTENSION_NAME) {
     }
 
     override suspend fun getMasterForSearch(query: String): Set<MasterModel> {
-        requestReadPermission()
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            with(context as Activity) {
+                if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1)
+                    emptySet()
+                } else {
+                    findModels(query)
+                }
+            }
+        } else {
+            findModels(query)
+        }
+    }
+
+    private suspend fun findModels(query: String): Set<MasterModel> {
         val modelSet = mutableSetOf<MasterModel>()
         withContext(coroutineContext) {
             scanDirs(query, getRootFile(), modelSet)
         }.join()
         return modelSet
-    }
-
-    private fun requestReadPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            with(context as Activity) {
-                if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                    requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1)
-                }
-            }
-        }
     }
 
     private fun getRootFile(): File {
