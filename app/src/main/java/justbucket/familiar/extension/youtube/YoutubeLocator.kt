@@ -45,7 +45,8 @@ class YoutubeLocator : ExtensionLocator(EXTENSION_NAME) {
                 thumbPath,
                 title,
                 "Youtube video",
-                detailLink
+                //detailLink
+                thumbPath
             )
         }
     }
